@@ -1,6 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
 require('dotenv').config();
+const connectDB = require('./config/db');
 
 // Route Import Hub
 const authRoutes = require('./routes/authRoutes');
@@ -10,6 +10,9 @@ const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 
 const app = express();
+
+// Connect to Database
+connectDB();
 
 // Global Middleware
 app.use(express.json());
@@ -21,15 +24,8 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRoutes);
 
-// Database connection initialization
+// Server Listening Initialization
 const PORT = process.env.PORT || 5000;
-//const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ecommerce_practice';
+app.listen(PORT, () => console.log(`🌍 Server operational on port: ${PORT}`));
 
-mongoose.connect(MONGODB_URI)
-  .then(() => {
-    console.log('Database engine securely connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server operational on port: ${PORT}`));
-  })
-  .catch(err => console.error('Database configuration error encountered:', err));
-
-  module.exports = app;
+module.exports = app;
