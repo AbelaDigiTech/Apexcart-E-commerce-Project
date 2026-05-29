@@ -7,6 +7,6 @@ router.use(protect); // All shopping cart management requires logging in first
 
 router.get('/', cartController.getCart);
 router.post('/', cartController.addToCartOrUpdate);
-router.delete('/:productId', cartController.removeItemFromCart);
+router.delete('/remove/:productId', protect,cartController.removeItemFromCart);
 
 module.exports = router;

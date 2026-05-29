@@ -22,10 +22,12 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
-app.use('/api/payment', paymentRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Server Listening Initialization
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🌍 Server operational on port: ${PORT}`));
+const PORT = process.env.PORT || 5454;
+app.listen(PORT, () => console.log(`Server operational on port: ${PORT}`));
 
 module.exports = app;

@@ -5,8 +5,12 @@ const ProductSchema = new mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true, min: 0 },
   category: { type: String, required: true },
-  stockCount: { type: Number, required: true, min: 0, default: 0 }
+  stockCount: { type: Number, required: true, min: 0, default: 0 },
+  image: {type: String,required: false, default: ''}
+
 }, { timestamps: true });
+
+
 
 // Client Rule: Automatically switch availability status based on stockCount
 ProductSchema.virtual('availabilityStatus').get(function() {
